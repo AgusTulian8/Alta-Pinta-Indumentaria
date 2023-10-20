@@ -1,5 +1,6 @@
 :root {
     --primary-color: #35495E;
+    --secondary-color:#F5F5F5;
 }
 
 body {
@@ -419,6 +420,43 @@ main {
 }
 
 
+
+/* ========================PAGINA ADMIN====================== */
+
+.table-image img{
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 50% ;
+}
+
+.table-title{
+    font-weight: 500;
+
+}
+
+.table-description{
+    font-size: .875rem;
+    font-family:monospace
+}
+
+.table-price{
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ==================MEDIA QUERYS================ */
 /* ================================================== */
 
@@ -514,3 +552,4 @@ main {
         margin: 30px 0;
     }
 }
+
