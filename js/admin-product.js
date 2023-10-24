@@ -1,14 +1,7 @@
-/* DEFINO PROPIEDADES DE MI OBJETO
-    -titulo
-    -descripcion
-    -imagen
-    -precio
-    -fechaCreacion
-    -categoria
-    -id (automatico) 
-*/
+
 const prendas = [
     {
+        id: 'f81f7976-e548-46ad-baf2-8228a7a97ba8',
         descripcion: 'Descripcion de la remera',
         titulo: 'Remera de Algodón Clásica',
         fechaDeCreacion: '2020-11-12',
@@ -17,6 +10,7 @@ const prendas = [
         categoria: 'remeras'
     },
     {
+        id:'f81f7976-e548-46ad-baf2-8228a7a97ba8',
         descripcion: 'descripcion de la remera',
         titulo: 'remera chomba',
         fechaDeCreacion: '2017-03-03',
@@ -25,6 +19,7 @@ const prendas = [
         categoria: 'remeras'
     },
     {
+        id:'9e12b3d1-31e4-4eea-98a8-2984c575956d',
         descripcion: 'buzo de hombre sin capucha, con grafiti',
         titulo: 'buzo hombre',
         fechaDeCreacion: '2020-11-10',
@@ -33,6 +28,7 @@ const prendas = [
         categoria: 'buzos'
     },
     {
+        id:'aaaa5967-2b19-4b83-b9bb-046095786f70',
         descripcion: 'buzo hombre con capucha, color naranja con estampado',
         titulo: 'buzo hombre',
         fechaDeCreacion: '2016-11-10',
@@ -44,18 +40,17 @@ const prendas = [
 ];
 const tableBodyHTML = document.querySelector("#table-product-body")
  
-pintarProductos()
+pintarProductos(prendas)
 
-const inpputFiltrarHTML = document.getElementById("filtrarProducto")
+const inputFiltrarHTML = document.getElementById("filtrarProducto")
 
 const formularioProductoHTMl = document.getElementById("product-form")
 
 //LISTENER EVENTO FORMULARIO
 formularioProductoHTMl.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-    evt.preventDefault()
-
-    const el = formularioProductoHTMl.elements
+    const el = formularioProductoHTMl.elements;
 
     const nuevoProducto = {
         id: crypto.randomUUID(),
@@ -65,53 +60,76 @@ formularioProductoHTMl.addEventListener('submit', (evt) => {
         imagen: el.imagenProducto.value,
         categoria: el.categoriaProducto.value,
         fechaDeCreacion: obtenerFecha()
+    };
 
-    }
+    prendas.push(nuevoProducto);
 
-    prendas.push(nuevoProducto)   
-    pintarProductos()
-    formularioProductoHTMl.reset()
-    el.titulo.name.focus()
-         
-})
+    // Llama a pintarProductos con el arreglo 'prendas'
+    pintarProductos(prendas);
+
+    formularioProductoHTMl.reset();
+    el.tituloProducto.focus();
+});
 
 
 
-function pintarProductos() {
-    tableBodyHTML.innerHTML= ""
-    
-    prendas.forEach(function (prenda,index) {
+function pintarProductos(arrayAPintar) {
+    tableBodyHTML.innerHTML = "";
+
+    arrayAPintar.forEach(function (prenda) {
         tableBodyHTML.innerHTML +=
-        `<tr>
-            <td class="table-image">
-            <img src="${prenda.imagen}"
-            alt="">
-            </td>
-            <td class="table-title">${prenda.titulo}</td>
-            <td class="table-description">${prenda.descripcion}</td>
-            <td class="table-price">${prenda.precio}</td>
-            <td class="table-category">${prenda.categoria}</td>
-            <td>
-                <button class="btn btn-danger" onclick="borrarProductos(${index})">
-                    <i class="fa-solid fa-trash-can" style=""></i>               
-                </button>
-            </td>
-        </tr>`
-    })
+            `<tr>
+                <td class="table-image">
+                <img src="${prenda.imagen}" alt="">
+                </td>
+                <td class="table-title">${prenda.titulo}</td>
+                <td class="table-description">${prenda.descripcion}</td>
+                <td class="table-price">${prenda.precio}</td>
+                <td class="table-category">${prenda.categoria}</td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-danger" onclick="borrarProducto('${prenda.id}')">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                        <button class="btn btn-success btn-sm" onclick="editarProducto('${prenda.id}')">
+                            <i class="fa-regular fa-pen-to-square"></i>
+                        </button>
+                    </div>                   
+                </td>
+            </tr>`;
+    });
 }
+
+
+
 
 
 //!filtrar productos
 
-inpputFiltrarHTML.addEventListener("keyup",(evt)=>{
+inputFiltrarHTML.addEventListener('keyup',(evt)=>{
 
-    console.log(evt.target.value)
-} )
+    const busqueda = evt.target.value.toLowerCase()
+    
+    const resultado = prendas.filter((producto) =>{
+        const titulo = producto.titulo
+
+        if(titulo.includes(busqueda)){
+            return true
+        }
+        return false
+    })
+    
+    pintarProductos(resultado)
+  
+})
 
  function borrarProductos(indiceRecibido){
   prendas.splice(indiceRecibido,1)
-  pintarProductos()
+  pintarProductos(prendas)
  }
+
+
+
 
 
 function obtenerFecha(){
@@ -133,13 +151,40 @@ function obtenerFecha(){
 }
         
 
+// !editar productos
+
+
+const borrarProducto = (idABuscar) =>{
+    const indiceEncontrado = prendas.findIndex
+    ((producoFindIndex) =>{
+        if(producoFindIndex.id === idABuscar){
+            return true
+        }
+        return false
+    })
+    prendas.splice(indiceEncontrado,1)
+    pintarProductos(prendas)
+    
+}
+
+const editarProducto = function (idRecibido){
+    console.log(`editar elemento ${idRecibido}`)
+
+        const productoEditar = prendas.filter(prod =>{
+            if(idRecibido === prod.id){
+                return true
+            }
+            return false
+        })
+
+console.log(productoEditar)
+}
+
+
         
         
         
-        
-        
-        
-        
+  
         
         
         
