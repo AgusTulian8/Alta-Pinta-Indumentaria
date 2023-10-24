@@ -85,7 +85,7 @@
           
             </div>
             
-          <div class="mb-3 d-flex gap-3 align-items-center">
+          <div class="mb-3 d-flex gap-3 ">
             <div class="w-100">
                 <label for="precioProducto" class="form-label">precio</label>
                 <input type="number" 
@@ -100,6 +100,7 @@
               <div class="w-100">
                   <label for="categoriaProducto">categoria</label>
                   <select class="form-select" id="categoriaProducto" name="categoria" required>
+                    <option value="" ></option >
                     <option value="remeras">Remeras</option>
                     <option value="buzos">Buzos</option>
                     <option value="pantalones">Pantalones</option>                   
@@ -109,7 +110,7 @@
             
             <div class="mb-3">
               <label for="imagenProducto" class="form-label">url</label>
-              <input type="URL" 
+              <input type="url" 
               name="imagen"
               class="form-control" 
               id="imagenProducto" 
@@ -131,7 +132,17 @@
           
       <div class="col-12 col-md-6">
         <!-- -tabla -->
-        <table class="table table-dark table-striped">
+        
+          <div class="mb-3">
+              <label for="filtrarProducto" class="form-label">filtrar</label>
+              <input 
+              type="text"               
+              class="form-control" 
+              id="filtrarProducto" 
+              placeholder="filtrar productos">
+          </div>
+        
+        <table class="table table-dark table-striped ">
           <thead>
               <tr>
                 <th scope="col">Imagen</th>
@@ -139,6 +150,7 @@
                 <th scope="col">Descripcion Producto</th>
                 <th scope="col">precio</th>
                 <th scope="col">Categoria</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody id="table-product-body">
@@ -161,5 +173,5 @@
       
       </tbody>
   </table>
-<script src="/js/admin.js"></script>
+<script src="/js/admin-product.js"></script>
   </body>

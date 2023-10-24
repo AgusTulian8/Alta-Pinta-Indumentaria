@@ -372,6 +372,9 @@ main {
     color: white;
 }
 
+#contactMessage{
+    resize:none;
+}
 
 /* ============FORMULARIO=========== */
 
@@ -404,8 +407,11 @@ main {
     justify-content: center;
 }
 
+#registerTextarea{
+    resize: none;
+}
 
-/* ==================ACERCA DE NOSOTROS====================== */
+/* -==================ACERCA DE NOSOTROS====================== */
 
 .about-content h2 {
     color: #35495E;
@@ -421,7 +427,9 @@ main {
 
 
 
-/* ========================PAGINA ADMIN====================== */
+/* -========================PAGINA ADMIN====================== */
+
+/* =================TABLA============= */
 
 .table-image img{
     width: 75px;
@@ -446,18 +454,23 @@ main {
 
 
 
+/* -formulario */
+
+#descripcionProducto{
+    resize: none;
+}
 
 
 
 
 
+.miTabla{
+    background-color: #35495E;
+}
 
 
 
-
-
-
-/* ==================MEDIA QUERYS================ */
+/* -==================MEDIA QUERYS================ */
 /* ================================================== */
 
 /* ==================MEDIA HEADER============ */
