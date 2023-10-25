@@ -1,5 +1,5 @@
 
-const prendas = [
+let prendas = [
     {
         id: 'f81f7976-e548-46ad-baf2-8228a7a97ba8',
         descripcion: 'Descripcion de la remera',
@@ -10,7 +10,7 @@ const prendas = [
         categoria: 'remeras'
     },
     {
-        id:'f81f7976-e548-46ad-baf2-8228a7a97ba8',
+        id:'e4b23127-d1f2-42ba-b259-b46da116dbb8',
         descripcion: 'descripcion de la remera',
         titulo: 'remera chomba',
         fechaDeCreacion: '2017-03-03',
@@ -38,37 +38,47 @@ const prendas = [
     }
     
 ];
-const tableBodyHTML = document.querySelector("#table-product-body")
- 
-pintarProductos(prendas)
+let idEditar; 
+const btn = document.querySelector('button[type="submit"]');
+const tableBodyHTML = document.querySelector("#table-product-body");
+pintarProductos(prendas);
+const inputFiltrarHTML = document.getElementById("filtrarProducto");
+const formularioProductoHTMl = document.getElementById("product-form");
 
-const inputFiltrarHTML = document.getElementById("filtrarProducto")
-
-const formularioProductoHTMl = document.getElementById("product-form")
-
-//LISTENER EVENTO FORMULARIO
+// LISTENER EVENTO FORMULARIO
 formularioProductoHTMl.addEventListener('submit', (evt) => {
-    evt.preventDefault();
+  evt.preventDefault();
 
-    const el = formularioProductoHTMl.elements;
+  const el = formularioProductoHTMl.elements;
+  const id = idEditar === undefined ? crypto.randomUUID() : idEditar;
 
-    const nuevoProducto = {
-        id: crypto.randomUUID(),
-        titulo: el.tituloProducto.value,
-        descripcion: el.descripcionProducto.value,
-        precio: el.precioProducto.valueAsNumber,
-        imagen: el.imagenProducto.value,
-        categoria: el.categoriaProducto.value,
-        fechaDeCreacion: obtenerFecha()
-    };
+  const nuevoProducto = {
+    id: id,
+    titulo: el.tituloProducto.value,
+    descripcion: el.descripcionProducto.value,
+    precio: el.precioProducto.valueAsNumber,
+    imagen: el.imagenProducto.value,
+    categoria: el.categoriaProducto.value,
+    fechaDeCreacion: obtenerFecha()
+  };
 
+  if (idEditar) {
+    // Editar producto existente
+    const index = prendas.findIndex(prenda => prenda.id === idEditar);
+    if (index !== -1) {
+      prendas[index] = nuevoProducto;
+      idEditar = undefined;
+      btn.innerText = "Agregar producto";
+      btn.classList.remove("btn-success");
+    }
+  } else {  
     prendas.push(nuevoProducto);
+  }
 
-    // Llama a pintarProductos con el arreglo 'prendas'
-    pintarProductos(prendas);
+  pintarProductos(prendas);
 
-    formularioProductoHTMl.reset();
-    el.tituloProducto.focus();
+  formularioProductoHTMl.reset();
+  el.tituloProducto.focus();
 });
 
 
@@ -77,14 +87,17 @@ function pintarProductos(arrayAPintar) {
     tableBodyHTML.innerHTML = "";
 
     arrayAPintar.forEach(function (prenda) {
-        tableBodyHTML.innerHTML +=
-            `<tr>
+        // Formatear el precio con punto en los miles
+        const precioFormateado = prenda.precio.toLocaleString();
+
+        tableBodyHTML.innerHTML += `
+            <tr>
                 <td class="table-image">
-                <img src="${prenda.imagen}" alt="">
+                    <img src="${prenda.imagen}" alt="">
                 </td>
                 <td class="table-title">${prenda.titulo}</td>
                 <td class="table-description">${prenda.descripcion}</td>
-                <td class="table-price">${prenda.precio}</td>
+                <td class="table-price">${precioFormateado}</td>
                 <td class="table-category">${prenda.categoria}</td>
                 <td>
                     <div class="d-flex gap-2">
@@ -99,9 +112,6 @@ function pintarProductos(arrayAPintar) {
             </tr>`;
     });
 }
-
-
-
 
 
 //!filtrar productos
@@ -129,9 +139,6 @@ inputFiltrarHTML.addEventListener('keyup',(evt)=>{
  }
 
 
-
-
-
 function obtenerFecha(){
     
     const fecha = new Date()
@@ -151,7 +158,6 @@ function obtenerFecha(){
 }
         
 
-// !editar productos
 
 
 const borrarProducto = (idABuscar) =>{
@@ -167,21 +173,36 @@ const borrarProducto = (idABuscar) =>{
     
 }
 
+// !editar productos 
 const editarProducto = function (idRecibido){
     console.log(`editar elemento ${idRecibido}`)
 
-        const productoEditar = prendas.filter(prod =>{
-            if(idRecibido === prod.id){
+        const productoEditar = prendas.find(prod =>{
+            if(prod.id === idRecibido){
                 return true
             }
             return false
         })
 
-console.log(productoEditar)
-}
+        if(!productoEditar) return
 
+        idEditar = productoEditar.id
 
-        
+        const elements = formularioProductoHTMl.elements
+
+        elements.producto.value = productoEditar.titulo
+        elements.precio.value = productoEditar.precio
+        elements.categoria.value = productoEditar.categoria
+        elements.imagen.value = productoEditar.imagen
+        elements.descripcion.value = productoEditar.descripcion
+
+       
+        btn.innerText = "Editar Producto"
+        btn.classList.add("btn-success")
+        console.log(btn)
+
+    }
+    
         
         
   
