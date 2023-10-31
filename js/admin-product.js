@@ -45,7 +45,8 @@ pintarProductos(prendas);
 const inputFiltrarHTML = document.getElementById("filtrarProducto");
 const formularioProductoHTMl = document.getElementById("product-form");
 
-// LISTENER EVENTO FORMULARIO
+// !LISTENER EVENTO FORMULARIO
+
 formularioProductoHTMl.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
