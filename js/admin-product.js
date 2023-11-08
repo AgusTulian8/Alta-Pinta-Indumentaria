@@ -1,5 +1,5 @@
 
-let prendas = [
+let prendasPrimerInicio = [
     {
         id: 'f81f7976-e548-46ad-baf2-8228a7a97ba8',
         descripcion: 'Descripcion de la remera',
@@ -14,7 +14,7 @@ let prendas = [
         descripcion: 'descripcion de la remera',
         titulo: 'remera chomba',
         fechaDeCreacion: '2017-03-03',
-        precio: 12.000,
+        precio: 12000,
         imagen: '/assets/images/remeras hombre/polo marron.jpg',
         categoria: 'remeras'
     },
@@ -37,8 +37,20 @@ let prendas = [
         categoria: 'buzos'
     }
     
-];
+]; 
+
+let prendas = JSON.parse(localStorage.getItem("productos")) || prendasPrimerInicio
+//! si nunca hemos guardado en el localStorage un item productos lo creamos en este of
+
+if (JSON.parse(localStorage.getItem("productos")) === null ){
+
+        localStorage.setItem("productos", JSON.stringify(prendas))
+}
+ 
+
 let idEditar; 
+
+
 const btn = document.querySelector('button[type="submit"]');
 const tableBodyHTML = document.querySelector("#table-product-body");
 pintarProductos(prendas);
@@ -76,11 +88,20 @@ formularioProductoHTMl.addEventListener('submit', (evt) => {
     prendas.push(nuevoProducto);
   }
 
+  Swal.fire({
+    icon: 'success',
+    title: 'Producto agregado/modificado correctamente',
+    text: 'El producto se actualizó o modificó correctamente',
+    footer: '<a href="">Why do I have this issue?</a>'
+  })
+
   pintarProductos(prendas);
+  localStorage.setItem("productos",JSON.stringify(prendas))
 
   formularioProductoHTMl.reset();
   el.tituloProducto.focus();
 });
+
 
 
 
@@ -105,12 +126,12 @@ function pintarProductos(arrayAPintar) {
                         <button class="btn btn-danger" onclick="borrarProducto('${prenda.id}')">
                             <i class="fa-solid fa-trash-can"></i>
                         </button>
-                        <button class="btn btn-success btn-sm" onclick="editarProducto('${prenda.id}')">
+                        <button class="btn btn-success btn-sm" onclick="editarProducto('${prenda.id}')" data-bs-toggle="modal" data-bs-target="#formModal">
                             <i class="fa-regular fa-pen-to-square"></i>
                         </button>
                     </div>                   
                 </td>
-            </tr>`;
+            </tr>`
     });
 }
 
@@ -136,6 +157,7 @@ inputFiltrarHTML.addEventListener('keyup',(evt)=>{
 
  function borrarProductos(indiceRecibido){
   prendas.splice(indiceRecibido,1)
+
   pintarProductos(prendas)
  }
 
@@ -162,17 +184,34 @@ function obtenerFecha(){
 
 
 const borrarProducto = (idABuscar) =>{
-    const indiceEncontrado = prendas.findIndex
-    ((producoFindIndex) =>{
-        if(producoFindIndex.id === idABuscar){
-            return true
+    Swal.fire({
+        title: 'Desea borar producto',
+        icon: 'error',
+        text: 'Realmente desea borrar el producto?',
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonText:'Borrar',
+        cancelButtonText: 'Cancelar'
+      }).then((result) =>{
+        if(result.isConfirmed){
+            const indiceEncontrado = prendas.findIndex
+            ((producoFindIndex) =>{
+                if(producoFindIndex.id === idABuscar){
+                    return true
+                }
+                return false
+            })
+            prendas.splice(indiceEncontrado,1)  
+            pintarProductos(prendas)
+
+            localStorage.setItem("productos", JSOn.stringify(prendas))
+
+            Swal.fire('Borrado!', 'Producto borrado correctamente', 'success')
         }
-        return false
-    })
-    prendas.splice(indiceEncontrado,1)
-    pintarProductos(prendas)
-    
-}
+      })
+
+    }   
+
 
 // !editar productos 
 const editarProducto = function (idRecibido){

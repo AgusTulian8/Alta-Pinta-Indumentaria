@@ -461,10 +461,25 @@ main {
     resize: none;
 }
 
+.container-xl{
+    background-color: #35495E;
+  
+    margin: 90px auto;
+    color: white;
+    border-radius: 12px;
+    
+
+}
 
 
+/* !login */
 
-
+.login-container{
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* -==================MEDIA QUERYS================ */
 /* ================================================== */
