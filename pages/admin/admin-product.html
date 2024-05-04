@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alta Pinta - principal</title>
+  <!-- FONTAWESOME  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- BOOTSTRAP  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <!-- CSS  -->
+  <link rel="stylesheet" href="/css/styles.css">
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ==================================================
+            ====================HEADER========================
+            ==================================================     -->
+  <header class="header">
+    <nav class="navbar navbar-expand-lg bg-primary-color header padding 0" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+          <img src="/assets/images/Aalta Pinta.jpg" alt="logo" class="header-logo">
+        </a>
+        <h1 class="tittle">ALTA PINTA</h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/index.html">Principal</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/contact/contact.html">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/about us/about-us.html">Acerca De</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/pages/register/register.html">Registro</a>
+            </li>
+          </ul>
+          <div class="user-info">
+            <a href="" class="cart-icon">
+              <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
+            </a>
+            <div class="user-name"><a href="/pages/login/login.html">Iniciar Sesion</a></div>
+            <img class="user-logo" src="https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png"
+              alt="user logo">
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===========================================
+  =================TABLA=================== -->
+  <div class="container-xl">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary  m-2" data-bs-toggle="modal" data-bs-target="#formModal">
+      Añadir
+    </button>
+    <div class="row">
+
+      <div class="col-12 col-12-lg ">
+        <!-- -tabla -->
+
+        <div class="mb-3">
+          <label for="filtrarProducto" class="form-label">filtrar</label>
+          <input type="text" class="form-control" id="filtrarProducto" placeholder="filtrar productos">
+        </div>
+
+        <table class="table table-dark table-striped ">
+          <thead>
+            <tr>
+              <th scope="col">Imagen</th>
+              <th scope="col">Titulo</th>
+              <th scope="col">Descripcion Producto</th>
+              <th scope="col">precio</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="table-product-body"></tbody>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="product-form">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">añadir producto</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="tituloProducto" class="form-label">Nombre producto</label>
+              <input type="text" name="producto" class="form-control" id="tituloProducto"
+                placeholder="remera manga corta" required minlength="3" maxlength="70">
+            </div>
+
+            <div class="mb-3 d-flex gap-3 ">
+              <div class="w-100">
+                <label for="precioProducto" class="form-label">precio</label>
+                <input type="number" name="precio" class="form-control" id="precioProducto" placeholder="$" required
+                  min="1" max="2000000" step=".01">
+
+              </div>
+              <div class="w-100 mt-2">
+                <label for="categoriaProducto">categoria</label>
+                <select class="form-select" id="categoriaProducto" name="categoria" required>
+                  <option value=""></option>
+                  <option value="remeras">Remeras</option>
+                  <option value="buzos">Buzos</option>
+                  <option value="pantalones">Pantalones</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="imagenProducto" class="form-label">url</label>
+              <input type="url" name="imagen" class="form-control" id="imagenProducto"
+                placeholder="https://direccion-de-la-imagen.com" required minlength="3" maxlength="300">
+
+            </div>
+            <!-- text area -->
+            <div class="mb-3">
+              <label for="descripcionProducto" class="form-label">Descripcion del producto</label>
+              <textarea name="descripcion" class="form-control" id="descripcionProducto" rows="3" required minlength="8"
+                maxlength="450" placeholder="Descripcion del producto..."></textarea>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary mb-1" value="agregar producto">agregar producto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/admin-product.js"></script>
+  <!-- <script src="/js/storage.js"></script> -->
+</body>

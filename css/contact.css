@@ -1,0 +1,9 @@
+.register-container{
+    flex-grow: 1;
+}
+
+.register-form-container{
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
