@@ -8,6 +8,7 @@ body {
     background-color: #F5F5F5;
     font-family: 'Philosopher', sans-serif;
     min-height: 100dvh;
+    position: relative;
 }
 
 /* =======================HEADER================== */
@@ -75,12 +76,46 @@ body {
     margin: right 0;
 }
 
+/* ** inicio carro de compras */
 
 .cart-icon {
     font-size: 26px;
     text-decoration: none;
+    
+}
+
+.cart-section{
+    position: absolute;
+    background-color: var(--primary-color);
+    height: 400px;
+    width: 400px;
+    right: 0;
+    top:90px;
+    border-radius: 0  0 12px 12px;
+    
 
 }
+
+.cart-list{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.table-cart-head tr{
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    justify-content: space-between;
+    height: 100%;
+    background-color: #2ECC71;
+    color: white;
+}
+
+
+/* ** fin carro de compras */
+
+
 
 .nav-item {
     font-size: 19px;
