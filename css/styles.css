@@ -424,8 +424,9 @@ main {
     
 }
 
-.social-links-list li{
+.social-links-list li a{
     margin-left: 0;
+    color:#FFFF;
 }
 
 .icon {
@@ -544,8 +545,25 @@ main {
     border-radius: 50%;
 }
 
+/* ====================login================ */
 
+.links-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
 
+.links-container a{
+    margin: 5px;
+    color:#FFFF;
+    text-decoration: none;
+}
+
+.links-container a:hover{
+    color: #007bff;
+    text-decoration: underline;
+}
 /* -========================PAGINA ADMIN====================== */
 
 /* =================TABLA============= */
