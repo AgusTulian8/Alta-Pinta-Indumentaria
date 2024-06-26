@@ -39,7 +39,7 @@ let prendasPrimerInicio = [
     
 ]; 
 
-export default prendasPrimerInicio;
+
 
 let prendas = JSON.parse(localStorage.getItem("productos")) || prendasPrimerInicio
 //! si nunca hemos guardado en el localStorage un item productos lo creamos en este of

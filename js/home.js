@@ -2,7 +2,12 @@ const prendas = JSON.parse(localStorage.getItem("productos")) ||[]
 
 prendas.forEach(prenda=> document.write (prenda.titulo +"\n"))
 
-// ?login User Navbar
+
+// const categoryShirt = document.querySelector("cate") 
+
+// function printProduct (prendas){
+
+// }
 
 
 
